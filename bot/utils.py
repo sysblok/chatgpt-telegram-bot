@@ -158,7 +158,7 @@ async def is_allowed(config, update: Update, context: CallbackContext, is_inline
     if is_admin(config, user_id):
         return True
     name = update.inline_query.from_user.name if is_inline else update.message.from_user.name
-    allowed_user_ids = config['allowed_user_ids'].split(',')
+    allowed_user_ids = [u.strip() for u in config['allowed_user_ids'].split(',')]
     # Check if user is allowed
     if str(user_id) in allowed_user_ids:
         return True
